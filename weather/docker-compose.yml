@@ -1,6 +1,24 @@
 version: "3.9"
 
 services:
+  server:
+    image: node:17
+    working_dir: /app
+    command: bash -c "npm install && npm install -g nodemon && nodemon bin/www"
+    volumes:
+      - ./server:/app
+
+    env_file: ./env/dev.env
+
+    environment:
+      DB_HOST: db
+
+    secrets:
+      - postgres-passwd
+
+    ports:
+      - "3000:3000"
+      
   node-scripts:
     image: node:17
     working_dir: /app
