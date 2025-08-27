@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  node-scripts:
+    image: node:17
+    working_dir: /app
+    command: sleep infinity
+
+    env_file: ./env/dev.env
+
+    volumes:
+      - ./node-scripts:/app
+
+    secrets:
+      - postgres-passwd
+      - weather-apikey
+
+  db:
+    image: "postgres"
+
+    env_file: ./env/dev.env
+
+    environment: 
+      DB_HOST: db
+
+    secrets:
+      - postgres-passwd
+
+    volumes:
+      - ./db/:/docker-entrypoint-initdb.d/
+
+    ports:
+      - "5432:5432"
+
+secrets:
+  postgres-passwd:
+    file: ./secrets/postgres-passwd
+
+  weather-apikey:
+    file: ./secrets/weather-apikey
