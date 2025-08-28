@@ -18,6 +18,6 @@ async function getLatestReports() {
 }
 
 module.exports = {
-  knex,             // <-- מייצא גם את החיבור עצמו
+  knex,
   getLatestReports,
 };
