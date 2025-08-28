@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   server:
-    image: node:17
+    image: node:18
     working_dir: /app
     command: bash -c "npm install && npm install -g nodemon && nodemon bin/www"
     volumes:

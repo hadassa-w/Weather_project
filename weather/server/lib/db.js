@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 const { POSTGRES_PASSWORD_FILE } = process.env;
 
 const dbPassword = fs.readFileSync(POSTGRES_PASSWORD_FILE, { encoding: 'utf8' }).trim();
@@ -7,10 +6,10 @@ const dbPassword = fs.readFileSync(POSTGRES_PASSWORD_FILE, { encoding: 'utf8' })
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : process.env.DB_HOST,
-    user : process.env.POSTGRES_USER,
-    password : dbPassword,
-    database : process.env.POSTGRES_DB,
+    host: process.env.DB_HOST,
+    user: process.env.POSTGRES_USER,
+    password: dbPassword,
+    database: process.env.POSTGRES_DB,
   }
 });
 
@@ -19,5 +18,6 @@ async function getLatestReports() {
 }
 
 module.exports = {
+  knex,             // <-- מייצא גם את החיבור עצמו
   getLatestReports,
 };
